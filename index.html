@@ -68,25 +68,31 @@
     </style>
     <script>
         function checkPassphrase() {
+            // Correct passphrase words
             const correctWords = ["ONLY", "THE", "QUICKEST", "ESCAPE", "EVIL"];
             const lastWordOptions = ["DUNGEONS", "CASTLES", "HIDEOUTS", "TOWERS", "CONFINES"];
-            
+        
+            // Get user inputs and trim whitespace
             const userWords = [];
             for (let i = 1; i <= 6; i++) {
-                userWords.push(document.getElementById("word" + i).value.toUpperCase());
+                let inputWord = document.getElementById("word" + i).value.trim().toUpperCase(); // Trim whitespace and convert to uppercase
+                userWords.push(inputWord);
             }
-
+        
+            // Count correct words
             let correctCount = 0;
             for (let i = 0; i < correctWords.length; i++) {
                 if (userWords[i] === correctWords[i]) {
                     correctCount++;
                 }
             }
-
+        
+            // Check if the last word is one of the allowed options
             if (lastWordOptions.includes(userWords[5])) {
                 correctCount++;
             }
-
+        
+            // Display result
             if (correctCount === 6) {
                 document.getElementById("congratulations").style.display = "block";
                 document.getElementById("result").innerHTML = "Congratulations, you've escaped!";
