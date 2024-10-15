@@ -38,21 +38,21 @@
                 userWords.push(document.getElementById("word" + i).value.toUpperCase());
             }
 
-            // Check if all words match
-            let isCorrect = true;
+            // Count correct words
+            let correctCount = 0;
             for (let i = 0; i < correctWords.length; i++) {
-                if (userWords[i] !== correctWords[i]) {
-                    isCorrect = false;
-                    break;
+                if (userWords[i] === correctWords[i]) {
+                    correctCount++;
                 }
             }
 
             // Display result
-            if (isCorrect) {
+            if (correctCount === 6) {
                 document.getElementById("congratulations").style.display = "block";
                 document.getElementById("result").innerHTML = "Congratulations, you've escaped!";
             } else {
-                document.getElementById("result").innerHTML = "Incorrect passphrase. Try again!";
+                document.getElementById("congratulations").style.display = "none";
+                document.getElementById("result").innerHTML = `Incorrect passphrase. ${correctCount} of 6 words are correct. Try again!`;
             }
         }
     </script>
@@ -78,7 +78,7 @@
 
     <!-- Congratulatory image that will appear on correct passphrase -->
     <div id="congratulations">
-        <img src="https://example.com/congrats-image.jpg" alt="Congratulations!" width="400px">
+        <img src="https://media.makeameme.org/created/congratulations-541b65f9e9.jpg" alt="Congratulations!" width="400px">
     </div>
 
 </body>
