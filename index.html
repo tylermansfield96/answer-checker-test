@@ -3,34 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Answer Validation</title>
+    <title>Dracula's Castle Escape</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 50px;
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+            font-size: 18px;
+        }
+        button {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+        #congratulations {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
     <script>
-        function checkAnswer() {
-            // Correct answer (you can change this to whatever correct answer you'd like)
-            const correctAnswer = "APPLE"; 
+        function checkPassphrase() {
+            // Correct passphrase words
+            const correctWords = ["ONLY", "THE", "QUICKEST", "ESCAPE", "EVIL", "CASTLES"];
+            
+            // Get user inputs
+            const userWords = [];
+            for (let i = 1; i <= 6; i++) {
+                userWords.push(document.getElementById("word" + i).value.toUpperCase());
+            }
 
-            // Get user input
-            const userInput = document.getElementById("answer").value.toUpperCase();
+            // Check if all words match
+            let isCorrect = true;
+            for (let i = 0; i < correctWords.length; i++) {
+                if (userWords[i] !== correctWords[i]) {
+                    isCorrect = false;
+                    break;
+                }
+            }
 
-            // Check if the answer is correct
-            if (userInput === correctAnswer) {
-                document.getElementById("result").innerHTML = "Correct, your number is 7";
-                document.getElementById("result").style.color = "green";
+            // Display result
+            if (isCorrect) {
+                document.getElementById("congratulations").style.display = "block";
+                document.getElementById("result").innerHTML = "Congratulations, you've escaped!";
             } else {
-                document.getElementById("result").innerHTML = "Incorrect, try again";
-                document.getElementById("result").style.color = "red";
+                document.getElementById("result").innerHTML = "Incorrect passphrase. Try again!";
             }
         }
     </script>
 </head>
 <body>
 
-    <h2>Enter the 5 letter answer:</h2>
+    <h1>Enter the 6 word passphrase to successfully escape Dracula's castle!</h1>
 
-    <input type="text" id="answer" maxlength="5" placeholder="Enter answer">
-    <button onclick="checkAnswer()">Submit</button>
+    <!-- Input fields for the passphrase -->
+    <input type="text" id="word1" placeholder="Word 1">
+    <input type="text" id="word2" placeholder="Word 2">
+    <input type="text" id="word3" placeholder="Word 3">
+    <input type="text" id="word4" placeholder="Word 4">
+    <input type="text" id="word5" placeholder="Word 5">
+    <input type="text" id="word6" placeholder="Word 6">
 
+    <br>
+    <!-- Submit button -->
+    <button onclick="checkPassphrase()">Submit</button>
+
+    <!-- Result message -->
     <p id="result"></p>
+
+    <!-- Congratulatory image that will appear on correct passphrase -->
+    <div id="congratulations">
+        <img src="https://example.com/congrats-image.jpg" alt="Congratulations!" width="400px">
+    </div>
 
 </body>
 </html>
